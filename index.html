@@ -84,7 +84,7 @@
           <span class="word-3">Meets Compassion</span>
         </h1>
         <p>For over three decades, we've set the gold standard in person-centered residential care across the UK—seamlessly blending clinical expertise with heartfelt compassion.</p>
-        <a href="#" class="btn">
+        <a href="#about" class="btn">
           <span class="btn-text">Discover Our Legacy</span>
           <span class="btn-icon">→</span>
         </a>
@@ -101,7 +101,7 @@
           <span class="word-3">& Purpose</span>
         </h1>
         <p>Every resident deserves to thrive, not just survive. Our expert teams cultivate nurturing environments that honor independence, safeguard privacy, and celebrate each unique life story.</p>
-        <a href="#" class="btn">
+        <a href="#about" class="btn">
           <span class="btn-text">Explore Our Philosophy</span>
           <span class="btn-icon">→</span>
         </a>
@@ -118,8 +118,8 @@
           <span class="word-3">Connection</span>
         </h1>
         <p>From specialist nursing to comprehensive daily support, our rigorously trained professionals tailor every detail of care—delivering comfort, security, and unwavering peace of mind.</p>
-        <a href="#" class="btn">
-          <span class="btn-text">View Our Residences</span>
+        <a href="#our-homes" class="btn">
+          <span class="btn-text">View Our Care Homes</span>
           <span class="btn-icon">→</span>
         </a>
       </div>
@@ -135,7 +135,7 @@
           <span class="word-3">in Care</span>
         </h1>
         <p>Exceptional purpose-built residences across Cardiff, Swansea, and Boston—meticulously designed to nurture wellbeing, strengthen community bonds, and create a true sense of belonging.</p>
-        <a href="#" class="btn">
+        <a href="#contact" class="btn">
           <span class="btn-text">Schedule Your Visit</span>
           <span class="btn-icon">→</span>
         </a>
@@ -665,7 +665,7 @@
   let current = 0;
   let autoSlide;
   let isTransitioning = false;
-  const slideInterval = 8000;
+  const slideInterval = 6000;
 
   // Create dots dynamically
   slides.forEach((_, i) => {
@@ -749,16 +749,7 @@
     autoplay();
   }
 
-  // Pause autoplay on hover
-  document.querySelector('.hero').addEventListener('mouseenter', () => {
-    clearInterval(autoSlide);
-    progressFill.style.animationPlayState = 'paused';
-  });
 
-  document.querySelector('.hero').addEventListener('mouseleave', () => {
-    autoplay();
-    progressFill.style.animationPlayState = 'running';
-  });
 
   // Keyboard navigation
   document.addEventListener('keydown', (e) => {
@@ -826,7 +817,7 @@
                 <div class="group">
                     <div class="text-5xl sm:text-6xl font-bold text-secondary mb-2" id="staff-counter">100</div>
                     <div class="text-text-secondary text-sm sm:text-base font-semibold">Dedicated Staff</div>
-                    <div class="text-text-secondary text-xs sm:text-sm mt-1">Caring Professionals</div>
+                    <div class="text-text-secondary text-xs sm:text-sm mt-1">Trusted Professionals</div>
                 </div>
                 <div class="group">
                     <div class="text-5xl sm:text-6xl font-bold text-accent mb-2" id="families-counter">2500</div>
