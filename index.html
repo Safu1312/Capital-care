@@ -784,8 +784,26 @@
 
 
 
-      <section id="about" class="pt-24 pb-16 bg-gradient-to-br from-secondary-50 to-primary-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<section id="about" class="pt-24 pb-16 bg-gradient-to-br from-secondary-50 to-primary-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <!-- Mission Statement Box -->
+        <div class="max-w-4xl mx-auto mb-16 bg-white rounded-2xl shadow-lg p-8 sm:p-12 border-t-4 border-primary scroll-animate fade-up">
+            <div class="inline-block mb-4 scroll-animate zoom-in" data-delay="200">
+                <svg class="w-12 h-12 text-primary mx-auto" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+                </svg>
+            </div>
+            <h2 class="font-inter font-bold text-3xl sm:text-4xl mb-6 scroll-animate fade-in" data-delay="400">
+                <span class="text-primary">Our Mission</span>
+                <span class="text-secondary"> Statement</span>
+            </h2>
+            <p class="text-lg sm:text-xl text-text-secondary leading-relaxed italic scroll-animate fade-in" data-delay="600">
+                "We are committed to making a tangible difference to the lives of our residents, their families and our employees."
+            </p>
+        </div>
+        
+        <!-- Story Section -->
+        <div class="scroll-animate fade-up" data-delay="200">
             <h1 class="font-inter font-bold text-4xl sm:text-5xl lg:text-6xl text-secondary mb-6 leading-tight">
                 Our Story of
                 <span class="text-primary block mt-2">Compassionate Care</span>
@@ -794,29 +812,117 @@
                 Over two decades of dedication, where every day we prove that professional excellence and genuine warmth can create something truly special.
             </p>
         </div>
-    </section>
+    </div>
+</section>
+
+<style>
+    /* Scroll Animation Styles */
+    .scroll-animate {
+        opacity: 0;
+        transition: all 0.8s ease-out;
+    }
+    
+    .scroll-animate.animated {
+        opacity: 1;
+    }
+    
+    /* Fade Up Animation */
+    .fade-up {
+        transform: translateY(50px);
+    }
+    
+    .fade-up.animated {
+        transform: translateY(0);
+    }
+    
+    /* Fade In Animation */
+    .fade-in {
+        transform: scale(0.95);
+    }
+    
+    .fade-in.animated {
+        transform: scale(1);
+    }
+    
+    /* Zoom In Animation */
+    .zoom-in {
+        transform: scale(0.5);
+    }
+    
+    .zoom-in.animated {
+        transform: scale(1);
+    }
+    
+    /* Slide Left Animation */
+    .slide-left {
+        transform: translateX(-50px);
+    }
+    
+    .slide-left.animated {
+        transform: translateX(0);
+    }
+    
+    /* Slide Right Animation */
+    .slide-right {
+        transform: translateX(50px);
+    }
+    
+    .slide-right.animated {
+        transform: translateX(0);
+    }
+</style>
+
+<script>
+    // Scroll Animation Observer
+    document.addEventListener('DOMContentLoaded', function() {
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.scroll-animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = entry.target.dataset.delay || 0;
+                        setTimeout(() => {
+                            entry.target.classList.add('animated');
+                        }, delay);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        };
+        
+        animateOnScroll();
+    });
+</script>
 
     <!-- Company Statistics -->
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div class="group">
-                    <div class="text-5xl sm:text-6xl font-bold text-primary mb-2" id="years-counter">20</div>
+                    <div class="text-5xl sm:text-6xl font-bold text-primary mb-2" id="years-counter">0</div>
                     <div class="text-text-secondary text-sm sm:text-base font-semibold">Years of Excellence</div>
                     <div class="text-text-secondary text-xs sm:text-sm mt-1">Since 2005</div>
                 </div>
                 <div class="group">
-                    <div class="text-5xl sm:text-6xl font-bold text-secondary mb-2" id="staff-counter">185</div>
+                    <div class="text-5xl sm:text-6xl font-bold text-secondary mb-2" id="staff-counter">0</div>
                     <div class="text-text-secondary text-sm sm:text-base font-semibold">Dedicated Staff</div>
                     <div class="text-text-secondary text-xs sm:text-sm mt-1">Our Team</div>
                 </div>
                 <div class="group">
-                    <div class="text-5xl sm:text-6xl font-bold text-accent mb-2" id="families-counter">141</div>
+                    <div class="text-5xl sm:text-6xl font-bold text-accent mb-2" id="families-counter">0</div>
                     <div class="text-text-secondary text-sm sm:text-base font-semibold">Residents in Care</div>
                     <div class="text-text-secondary text-xs sm:text-sm mt-1">Trust & Care</div>
                 </div>
                 <div class="group">
-                    <div class="text-5xl sm:text-6xl font-bold text-primary mb-2" id="facilities-counter">5</div>
+                    <div class="text-5xl sm:text-6xl font-bold text-primary mb-2" id="facilities-counter">0</div>
                     <div class="text-text-secondary text-sm sm:text-base font-semibold">Specialized Facilities</div>
                     <div class="text-text-secondary text-xs sm:text-sm mt-1">Across the UK</div>
                 </div>
@@ -824,40 +930,167 @@
         </div>
     </section>
 
-    <!-- Our Story Section -->
-    <section class="py-20 bg-gradient-to-b from-surface to-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div class="order-2 lg:order-1">
-                    <h2 class="font-inter font-bold text-3xl sm:text-4xl text-secondary mb-6">
-                        Where It All Began
-                    </h2>
-                    <div class="space-y-6 text-lg text-text-secondary leading-relaxed">
-                        <p>
-                            In 2005, Capital Care Homes Ltd was founded on a simple yet profound belief: that exceptional healthcare should never compromise the warmth and dignity that every person deserves. What started as a vision has grown into a trusted network of four specialized facilities across the UK.
-                        </p>
-                        <p>
-                            Our journey began with a commitment to bridge the gap between clinical excellence and genuine human connection. We understood that families needed more than just medical care—they needed peace of mind, knowing their loved ones were not just patients, but cherished members of our extended family.
-                        </p>
-                        <p class="font-accent italic text-primary text-xl">
-                            "We don't just provide care; we create homes where dignity, respect, and professional excellence come together to nurture the human spirit."
-                        </p>
-                    </div>
+<!-- Our Story Section -->
+<section class="py-20 bg-gradient-to-b from-surface to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="order-2 lg:order-1">
+                <h2 class="font-inter font-bold text-3xl sm:text-4xl text-secondary mb-6 scroll-animate fade-blur">
+                    Where It All Began
+                </h2>
+                <div class="space-y-6 text-lg text-text-secondary leading-relaxed">
+                    <p class="scroll-animate fade-blur" data-delay="200">
+                        In 2005, Capital Care Homes Ltd was founded on a simple yet profound belief: that exceptional healthcare should never compromise the warmth and dignity that every person deserves. What started as a vision has grown into a trusted network of four specialized facilities across the UK.
+                    </p>
+                    <p class="scroll-animate fade-blur" data-delay="400">
+                        Our journey began with a commitment to bridge the gap between clinical excellence and genuine human connection. We understood that families needed more than just medical care—they needed peace of mind, knowing their loved ones were not just patients, but cherished members of our extended family.
+                    </p>
+                    <p class="font-accent italic text-primary text-xl scroll-animate fade-blur" data-delay="600">
+                        "We don't just provide care; we create homes where dignity, respect, and professional excellence come together to nurture the human spirit."
+                    </p>
                 </div>
-                <div class="order-1 lg:order-2">
-                    <div class="relative">
-                        <img src="assets/images/Team.jpg" style="object-fit:scale-down;" alt="Caring staff member reading with elderly resident in comfortable home setting" class="w-full h-96 object-cover rounded-lg shadow-card" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
-                        <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-primary rounded-full flex items-center justify-center shadow-elevated">
-                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                            </svg>
-                        </div>
+            </div>
+            <div class="order-1 lg:order-2">
+                <div class="relative scroll-animate slide-right" data-delay="200">
+                    <div class="image-reveal-wrapper">
+                        <img src="assets/images/Team.jpg" style="object-fit:scale-down;" alt="Caring staff member reading with elderly resident in comfortable home setting" class="w-full h-90 object-cover rounded-lg shadow-card" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-primary rounded-full flex items-center justify-center shadow-elevated scroll-animate pop-in" data-delay="700">
+                        <svg class="w-12 h-12 text-white heart-beat" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
+<style>
+    /* Base Animation Styles */
+    .scroll-animate {
+        opacity: 0;
+        transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .scroll-animate.active {
+        opacity: 1;
+    }
+    
+  /* Luxury Fade Scale Animation for Text */
+.fade-blur {
+    opacity: 0;
+    transform: scale(0.96) translateY(15px);
+    transition: all 1.1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.fade-blur.active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+    
+    /* Slide Right Animation */
+    .slide-right {
+        transform: translateX(100px);
+    }
+    
+    .slide-right.active {
+        transform: translateX(0);
+    }
+    
+    /* Pop In Animation */
+    .pop-in {
+        transform: scale(0);
+        transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    
+    .pop-in.active {
+        transform: scale(1);
+    }
+    
+    /* Image Reveal Effect */
+    .image-reveal-wrapper {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .image-reveal-wrapper::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, #DAA520, #8B4513);
+        transform: translateX(-100%);
+        z-index: 1;
+        transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    
+    .scroll-animate.active .image-reveal-wrapper::before {
+        transform: translateX(100%);
+    }
+    
+    /* Heart Beat Animation */
+    @keyframes heartbeat {
+        0%, 100% {
+            transform: scale(1);
+        }
+        10%, 30% {
+            transform: scale(1.1);
+        }
+        20%, 40% {
+            transform: scale(0.95);
+        }
+    }
+    
+    .pop-in.active .heart-beat {
+        animation: heartbeat 1.5s ease-in-out 0.5s;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+        .slide-right {
+            transform: translateY(50px);
+        }
+        
+        .slide-right.active {
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<script>
+    // Advanced Scroll Animation
+    document.addEventListener('DOMContentLoaded', function() {
+        const animateElements = document.querySelectorAll('.scroll-animate');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const animateOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    const delay = element.getAttribute('data-delay') || 0;
+                    
+                    setTimeout(() => {
+                        element.classList.add('active');
+                    }, parseInt(delay));
+                    
+                    // Unobserve to prevent re-triggering
+                    observer.unobserve(element);
+                }
+            });
+        }, observerOptions);
+        
+        animateElements.forEach(element => {
+            animateOnScroll.observe(element);
+        });
+    });
+</script>
 
 
 
@@ -945,21 +1178,21 @@
         </div>
     </section>
 
-    <!-- === HEAD OFFICE SECTION === -->
+<!-- === HEAD OFFICE SECTION === -->
 <section id="headoffice" class="relative overflow-hidden py-20 bg-gradient-to-br from-secondary/10 via-white to-primary/10">
   <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center px-6 gap-12">
 
     <!-- LEFT SIDE – INFO -->
     <div class="z-10">
-      <h2 class="font-inter font-bold text-4xl sm:text-5xl text-secondary mb-6 leading-tight">
+      <h2 class="font-inter font-bold text-4xl sm:text-5xl text-secondary mb-6 leading-tight office-animate fade-up">
         Our <span class="text-primary">Head Office</span>
       </h2>
-      <p class="text-lg text-text-secondary mb-10 leading-relaxed" style="margin-bottom: 1rem; margin-top: -10px;">
+      <p class="text-lg text-text-secondary mb-10 leading-relaxed office-animate fade-up" data-delay="100" style="margin-top: -10px;">
         Our head office team manages Accounts, HR, Marketing, IT services, and Property.
       </p>
 
       <div class="space-y-6">
-        <div class="info-card group">
+        <div class="info-card group office-animate fade-up" data-delay="200">
           <div class="icon-wrap bg-primary/10 text-primary">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0L6.342 16.657a8 8 0 1111.314 0z"/>
@@ -967,12 +1200,12 @@
             </svg>
           </div>
           <div>
-            <h3 class="font-semibold text-secondary text-lg">Address</h3>
-            <p>Winifred Place Ltd<br> 2d Lodge Lane,  North Finchley,  London   N12 8FE</p>
+            <h3 class="font-semibold text-secondary text-lg mb-1">Address</h3>
+            <p class="text-text-secondary">Winifred Place Ltd<br> 2d Lodge Lane, North Finchley, London N12 8FE</p>
           </div>
         </div>
 
-        <div class="info-card group">
+        <div class="info-card group office-animate fade-up" data-delay="300">
           <div class="icon-wrap bg-secondary/10 text-secondary">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" 
@@ -980,12 +1213,12 @@
             </svg>
           </div>
           <div>
-            <h3 class="font-semibold text-secondary text-lg">Phone</h3>
-            <a href="tel:+442083696000" class="text-primary font-semibold hover:text-primary-600 transition">020 8369 6000</a>
+            <h3 class="font-semibold text-secondary text-lg mb-1">Phone</h3>
+            <a href="tel:+442083696000" class="text-primary text-lg font-semibold hover:text-primary-600 hover:underline transition-all">020 8369 6000</a>
           </div>
         </div>
 
-        <div class="info-card group">
+        <div class="info-card group office-animate fade-up" data-delay="400">
           <div class="icon-wrap bg-accent/10 text-accent">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" 
@@ -993,8 +1226,8 @@
             </svg>
           </div>
           <div>
-            <h3 class="font-semibold text-secondary text-lg">Email</h3>
-            <a href="mailto:Jayesh@capitalcarehomes.com" class="text-primary font-semibold hover:text-primary-600 transition">
+            <h3 class="font-semibold text-secondary text-lg mb-1">Email</h3>
+            <a href="mailto:Jayesh@capitalcarehomes.com" class="text-primary font-semibold hover:text-primary-600 hover:underline transition-all break-all">
               Jayesh@capitalcarehomes.com
             </a>
           </div>
@@ -1003,35 +1236,34 @@
     </div>
 
     <!-- RIGHT SIDE – MAP WITH LOADER -->
-    <!-- === RIGHT SIDE – MAP WITH LOADER === -->
-<div class="relative w-full h-[420px] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-secondary/10">
-  <!-- Loader -->
-  <div id="map-loader" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-10">
-    <div class="loader-spinner mb-4"></div>
-    <p class="text-secondary font-semibold">Loading map…</p>
-  </div>
+    <div class="relative w-full h-[420px] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-secondary/10 office-animate zoom-in" data-delay="200">
+      <!-- Loader -->
+      <div id="map-loader" class="absolute inset-0 flex flex-col items-center justify-center bg-white z-10">
+        <div class="loader-spinner mb-4"></div>
+        <p class="text-secondary font-semibold">Loading map…</p>
+      </div>
 
-  <!-- Actual Google Map -->
-  <iframe
-    id="office-map"
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9419.21579043927!2d-0.1774176!3d51.6161969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487619e6226b8adb%3A0xcedfc7746d7541b!2sLondon%20N12%208FE%2C%20UK!5e1!3m2!1sen!2slk!4v1759928980502!5m2!1sen!2slk"
-    width="600"
-    height="450"
-    style="border:0; opacity:0; transition:opacity 0.7s;"
-    allowfullscreen=""
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade">
-  </iframe>
+      <!-- Actual Google Map -->
+      <iframe
+        id="office-map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9419.21579043927!2d-0.1774176!3d51.6161969!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487619e6226b8adb%3A0xcedfc7746d7541b!2sLondon%20N12%208FE%2C%20UK!5e1!3m2!1sen!2slk!4v1759928980502!5m2!1sen!2slk"
+        width="600"
+        height="450"
+        style="border:0; opacity:0; transition:opacity 0.7s;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
 
-  <!-- Animated Pin Overlay -->
-  <div class="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-[130%] w-6 h-6 bg-primary rounded-full shadow-lg animate-pulsePin"></div>
-</div>
+      <!-- Animated Pin Overlay -->
+      <div class="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-[130%] w-6 h-6 bg-primary rounded-full shadow-lg animate-pulsePin"></div>
+    </div>
   </div>
 </section>
 
 <!-- === STYLES === -->
 <style>
-  /* Cards */
+  /* Cards - Enhanced hover */
   .info-card {
     display: flex;
     align-items: flex-start;
@@ -1040,63 +1272,150 @@
     border-radius: 0.75rem;
     padding: 1rem 1.25rem;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    transition: all 0.4s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .info-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
   }
+  
   .icon-wrap {
-    width: 48px; height: 48px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 9999px; flex-shrink: 0;
+    width: 48px; 
+    height: 48px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    border-radius: 9999px; 
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+  
+  .info-card:hover .icon-wrap {
+    transform: scale(1.1);
   }
 
   /* Map pin pulse */
   @keyframes pulsePin {
-    0%,100% { transform: translateY(-130%) scale(1); opacity:1; }
-    50%     { transform: translateY(-120%) scale(1.4); opacity:.8; }
+    0%,100% { 
+      transform: translateY(-130%) scale(1); 
+      opacity:1; 
+      box-shadow: 0 0 0 0 rgba(218, 165, 32, 0.7);
+    }
+    50% { 
+      transform: translateY(-120%) scale(1.4); 
+      opacity:.8; 
+      box-shadow: 0 0 0 10px rgba(218, 165, 32, 0);
+    }
   }
-  .animate-pulsePin { animation: pulsePin 2s infinite ease-in-out; }
+  .animate-pulsePin { 
+    animation: pulsePin 2s infinite ease-in-out; 
+  }
 
   /* Loader spinner */
   .loader-spinner {
-    width: 36px; height: 36px;
-    border: 3px solid rgba(54,72,57,0.2);
-    border-top-color: #c5913c;
+    width: 40px; 
+    height: 40px;
+    border: 3px solid rgba(54,72,57,0.15);
+    border-top-color: #DAA520;
     border-radius: 50%;
-    animation: spin 1s linear infinite;
+    animation: spin 0.8s linear infinite;
   }
-  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes spin { 
+    to { transform: rotate(360deg); } 
+  }
+  
+  /* Scroll Animations */
+  #headoffice .office-animate {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  #headoffice .office-animate.active {
+    opacity: 1;
+  }
+  
+  #headoffice .fade-up {
+    transform: translateY(30px);
+  }
+  
+  #headoffice .fade-up.active {
+    transform: translateY(0);
+  }
+  
+  #headoffice .zoom-in {
+    transform: scale(0.95);
+  }
+  
+  #headoffice .zoom-in.active {
+    transform: scale(1);
+  }
 </style>
 
 <!-- === JS === -->
 <script>
+  // Map Loader
   const map = document.getElementById('office-map');
   const loader = document.getElementById('map-loader');
 
   function hideLoader() {
-    loader.style.opacity = '0';
-    setTimeout(() => loader.remove(), 700);
-    map.style.opacity = '1';
+    if (loader) {
+      loader.style.opacity = '0';
+      setTimeout(() => loader.remove(), 700);
+    }
+    if (map) {
+      map.style.opacity = '1';
+    }
   }
 
   // When map finishes loading
-  map.addEventListener('load', hideLoader);
+  if (map) {
+    map.addEventListener('load', hideLoader);
+  }
 
   // Fallback in case Google blocks the event
   setTimeout(() => {
     if (loader) hideLoader();
-  }, 6000);  // force remove after 6s
+  }, 6000);
+  
+  // Scroll Animations for Head Office Section
+  document.addEventListener('DOMContentLoaded', function() {
+    const officeSection = document.getElementById('headoffice');
+    if (!officeSection) return;
+    
+    const officeAnimateElements = officeSection.querySelectorAll('.office-animate');
+    
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -80px 0px'
+    };
+    
+    const officeAnimateOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const element = entry.target;
+          const delay = element.getAttribute('data-delay') || 0;
+          
+          setTimeout(() => {
+            element.classList.add('active');
+          }, parseInt(delay));
+          
+          observer.unobserve(element);
+        }
+      });
+    }, observerOptions);
+    
+    officeAnimateElements.forEach(element => {
+      officeAnimateOnScroll.observe(element);
+    });
+  });
 </script>
-
 
 
 
  
 
 <!-- Care Homes Division -->
-<section class="py-16 bg-white">
+<section class="py-16 bg-white" id="our-homes">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <h2 class="font-inter font-bold text-3xl sm:text-4xl text-secondary mb-4">
@@ -1292,7 +1611,7 @@
               </p>
             </div>
             <div class="text-right">
-              <div class="text-2xl font-bold text-accent">25</div>
+              <div class="text-2xl font-bold text-accent">27</div>
               <div class="text-sm text-text-secondary">Residents</div>
             </div>
           </div>
@@ -1372,7 +1691,7 @@
               </p>
             </div>
             <div class="text-right">
-              <div class="text-2xl font-bold text-accent">40</div>
+              <div class="text-2xl font-bold text-accent">28</div>
               <div class="text-sm text-text-secondary">Residents</div>
             </div>
           </div>
@@ -1786,17 +2105,17 @@
                     
                     if (staffCounter && !staffCounter.classList.contains('animated')) {
                         staffCounter.classList.add('animated');
-                        animateCounter(staffCounter, 185, 1500);
+                        animateCounter(staffCounter, 150, 1500);
                     }
 
                     if (familiesCounter && !familiesCounter.classList.contains('animated')) {
                         familiesCounter.classList.add('animated');
-                        animateCounter(familiesCounter, 141, 1500);
+                        animateCounter(familiesCounter, 110, 1500);
                     }
 
                     if (facilitiesCounter && !facilitiesCounter.classList.contains('animated')) {
                         facilitiesCounter.classList.add('animated');
-                        animateCounter(facilitiesCounter, 5, 1000);
+                        animateCounter(facilitiesCounter, 4, 1000);
                     }
 
 
@@ -2405,7 +2724,7 @@
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
                         <li><a href="#about">About Us</a></li>
-                        <li><a href="#head-office">Head Office</a></li>
+                        <li><a href="#headoffice">Head Office</a></li>
                         <li><a href="#our-homes">Our Homes</a></li>
                         <li><a href="#contact">Contact Us</a></li>
                     </ul>
