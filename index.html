@@ -784,126 +784,121 @@
 
 
 
-<section id="about" class="pt-24 pb-16 bg-gradient-to-br from-secondary-50 to-primary-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <!-- Mission Statement Box -->
-        <div class="max-w-4xl mx-auto mb-16 bg-white rounded-2xl shadow-lg p-8 sm:p-12 border-t-4 border-primary scroll-animate fade-up">
-            <div class="inline-block mb-4 scroll-animate zoom-in" data-delay="200">
-                <svg class="w-12 h-12 text-primary mx-auto" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
-                </svg>
-            </div>
-            <h2 class="font-inter font-bold text-3xl sm:text-4xl mb-6 scroll-animate fade-in" data-delay="400">
-                <span class="text-primary">Our Mission</span>
-                <span class="text-secondary"> Statement</span>
-            </h2>
-            <p class="text-lg sm:text-xl text-text-secondary leading-relaxed italic scroll-animate fade-in" data-delay="600">
-                "We are committed to making a tangible difference to the lives of our residents, their families and our employees."
-            </p>
-        </div>
-        
-        <!-- Story Section -->
-        <div class="scroll-animate fade-up" data-delay="200">
-            <h1 class="font-inter font-bold text-4xl sm:text-5xl lg:text-6xl text-secondary mb-6 leading-tight">
-                Our Story of
-                <span class="text-primary block mt-2">Compassionate Care</span>
-            </h1>
-            <p class="text-xl sm:text-2xl text-text-secondary mb-8 leading-relaxed max-w-3xl mx-auto">
-                Over two decades of dedication, where every day we prove that professional excellence and genuine warmth can create something truly special.
-            </p>
-        </div>
+<section id="about" class="pt-24 pb-16 bg-gradient-to-br from-secondary-50 to-primary-50" aria-labelledby="about-title">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <!-- Story Section -->
+    <div class="scroll-animate fade-up" data-delay="200">
+      <h1 id="about-title" class="font-inter font-bold text-4xl sm:text-5xl lg:text-6xl text-primary mb-6 leading-tight" style="margin-top: -10px;">
+        Our Mission
+        <span class="text-secondary block mt-2">Statement</span>
+      </h1>
+      
+      <blockquote class="mission-quote text-lg sm:text-xl text-text-secondary leading-relaxed not-italic scroll-animate fade-in max-w-3xl mx-auto pl-8 pr-8 sm:pl-10 sm:pr-10 py-6 mt-8 mb-12 rounded-lg shadow-lg" data-delay="400">
+        "We are committed to making a tangible difference to the lives of our residents, their families and our employees."
+      </blockquote>
+      
+      <p class="text-xl sm:text-2xl text-text-secondary mb-8 leading-relaxed max-w-3xl mx-auto scroll-animate fade-up" data-delay="600" style="margin-top: -10px; margin-bottom: 20px;">
+        Over two decades of dedication, where every day we prove that professional excellence and genuine warmth can create something truly special.
+      </p>
     </div>
+  </div>
 </section>
 
+
 <style>
-    /* Scroll Animation Styles */
+   /* Mission Quote Styling */
+    .mission-quote {
+      text-wrap: balance;
+      letter-spacing: 0.007em;
+      position: relative;
+      border-left: 3px solid var(--color-secondary,);
+    }
+    
+    .mission-quote::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 15px;
+      font-size: 4rem;
+      color: var(--color-secondary, #6366f1);
+      opacity: 0.2;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    /* Scroll Animation Base Styles */
     .scroll-animate {
-        opacity: 0;
-        transition: all 0.8s ease-out;
+      opacity: 0;
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      will-change: opacity, transform;
     }
-    
+
     .scroll-animate.animated {
-        opacity: 1;
+      opacity: 1;
     }
-    
+
     /* Fade Up Animation */
     .fade-up {
-        transform: translateY(50px);
+      transform: translateY(50px);
     }
-    
+
     .fade-up.animated {
-        transform: translateY(0);
+      transform: translateY(0);
     }
-    
+
     /* Fade In Animation */
     .fade-in {
-        transform: scale(0.95);
+      transform: scale(0.95);
     }
-    
+
     .fade-in.animated {
-        transform: scale(1);
+      transform: scale(1);
     }
-    
-    /* Zoom In Animation */
-    .zoom-in {
-        transform: scale(0.5);
-    }
-    
-    .zoom-in.animated {
-        transform: scale(1);
-    }
-    
-    /* Slide Left Animation */
-    .slide-left {
-        transform: translateX(-50px);
-    }
-    
-    .slide-left.animated {
-        transform: translateX(0);
-    }
-    
-    /* Slide Right Animation */
-    .slide-right {
-        transform: translateX(50px);
-    }
-    
-    .slide-right.animated {
-        transform: translateX(0);
+
+    /* Respect Reduced Motion Preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-animate {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
     }
 </style>
 
 <script>
-    // Scroll Animation Observer
-    document.addEventListener('DOMContentLoaded', function() {
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.scroll-animate');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const delay = entry.target.dataset.delay || 0;
-                        setTimeout(() => {
-                            entry.target.classList.add('animated');
-                        }, delay);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-            
-            elements.forEach(element => {
-                observer.observe(element);
-            });
-        };
-        
-        animateOnScroll();
+  // Scroll Animation Observer
+  document.addEventListener('DOMContentLoaded', () => {
+    const elements = document.querySelectorAll('.scroll-animate');
+
+    // Fallback for browsers without IntersectionObserver
+    if (!('IntersectionObserver' in window)) {
+      elements.forEach(el => el.classList.add('animated'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        const delay = parseInt(entry.target.dataset.delay || '0', 10);
+        setTimeout(() => {
+          entry.target.classList.add('animated');
+        }, delay);
+
+        observer.unobserve(entry.target);
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
     });
+
+    elements.forEach(el => observer.observe(el));
+  });
 </script>
 
+
     <!-- Company Statistics -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-white" style="margin-top: -60px;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div class="group">
@@ -2235,68 +2230,66 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Animated counters
-        function animateCounter(element, target, duration = 2000) {
-            let start = 0;
-            const increment = target / (duration / 16);
+       // Animated counters
+function animateCounter(element, target, duration = 2000) {
+    let start = 0;
+    const increment = target / (duration / 16);
+    
+    function updateCounter() {
+        start += increment;
+        if (start < target) {
+            element.textContent = Math.floor(start);
+            requestAnimationFrame(updateCounter);
+        } else {
+            element.textContent = target;
+        }
+    }
+    updateCounter();
+}
+
+// Intersection Observer for counter animation
+const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const yearsCounter = document.getElementById('years-counter');
+            const staffCounter = document.getElementById('staff-counter');
+            const familiesCounter = document.getElementById('families-counter');
+            const facilitiesCounter = document.getElementById('facilities-counter');
             
-            function updateCounter() {
-                start += increment;
-                if (start < target) {
-                    element.textContent = Math.floor(start);
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    element.textContent = target;
-                }
+            // Reset counters to 0 before animating
+            if (yearsCounter) {
+                yearsCounter.textContent = '0';
+                animateCounter(yearsCounter, 20, 1500);
             }
-            updateCounter();
+            
+            if (staffCounter) {
+                staffCounter.textContent = '0';
+                animateCounter(staffCounter, 150, 1500);
+            }
+
+            if (familiesCounter) {
+                familiesCounter.textContent = '0';
+                animateCounter(familiesCounter, 110, 1500);
+            }
+
+            if (facilitiesCounter) {
+                facilitiesCounter.textContent = '0';
+                animateCounter(facilitiesCounter, 4, 1000);
+            }
         }
+    });
+}, observerOptions);
 
-        // Intersection Observer for counter animation
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const yearsCounter = document.getElementById('years-counter');
-                    const staffCounter = document.getElementById('staff-counter');
-                    const familiesCounter = document.getElementById('families-counter');
-                    const facilitiesCounter = document.getElementById('facilities-counter');
-                    
-                    if (yearsCounter && !yearsCounter.classList.contains('animated')) {
-                        yearsCounter.classList.add('animated');
-                        animateCounter(yearsCounter, 20, 1500);
-                    }
-                    
-                    if (staffCounter && !staffCounter.classList.contains('animated')) {
-                        staffCounter.classList.add('animated');
-                        animateCounter(staffCounter, 150, 1500);
-                    }
-
-                    if (familiesCounter && !familiesCounter.classList.contains('animated')) {
-                        familiesCounter.classList.add('animated');
-                        animateCounter(familiesCounter, 110, 1500);
-                    }
-
-                    if (facilitiesCounter && !facilitiesCounter.classList.contains('animated')) {
-                        facilitiesCounter.classList.add('animated');
-                        animateCounter(facilitiesCounter, 4, 1000);
-                    }
-
-
-                }
-            });
-        }, observerOptions);
-
-        // Observe the statistics section
-        const statsSection = document.querySelector('.py-16.bg-white');
-        if (statsSection) {
-            observer.observe(statsSection);
-        }
-
+// Observe the statistics section
+const statsSection = document.querySelector('.py-16.bg-white');
+if (statsSection) {
+    observer.observe(statsSection);
+}
         // Value cards interaction
         document.querySelectorAll('[data-value]').forEach(card => {
             card.addEventListener('click', function() {
