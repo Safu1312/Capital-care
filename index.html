@@ -38,7 +38,7 @@
       
       <!-- Logo -->
       <div class="flex items-center">
-        <a href="#hero" class="flex items-center space-x-2">
+        <a href="index.html" class="flex items-center space-x-2">
           <div class="flex items-center space-x-3">
   <img src="assets/images/CCH_logo.png" alt="Capital Care Homes Logo" class="h-12 w-auto object-contain">
   <svg class="h-10 w-auto" viewBox="0 0 350 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +92,7 @@
   <div class="slides">
 
     <!-- Slide 1 -->
-    <div class="slide active" style="--bg:url('../assets/images/H1.jpg')">
+    <div class="slide" style="--bg:url('../assets/images/H1.jpg')">
       <div class="overlay"></div>
       <div class="content">
         <h1>
@@ -647,138 +647,124 @@
 </style>
 
 <!-- ===== JS ===== -->
-<script>
-  const slides = document.querySelectorAll('.slide');
-  const dotsContainer = document.querySelector('.dots');
-  const prevBtn = document.querySelector('.prev');
-  const nextBtn = document.querySelector('.next');
-  const progressFill = document.querySelector('.progress-fill');
-  let current = 0;
-  let autoSlide;
-  let isTransitioning = false;
-  const slideInterval = 8000;
+<script>const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.querySelector('.dots');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+const progressFill = document.querySelector('.progress-fill');
+let current = 0;
+let autoSlide;
+let isTransitioning = false;
+const slideInterval = 8000;
 
-  // Create dots dynamically
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.setAttribute('role', 'tab');
-    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-    if (i === 0) {
-      dot.classList.add('active');
-      dot.setAttribute('aria-selected', 'true');
-    } else {
-      dot.setAttribute('aria-selected', 'false');
-    }
-    dotsContainer.appendChild(dot);
-  });
-  const dots = dotsContainer.querySelectorAll('button');
-
-  function showSlide(index) {
-    if (isTransitioning) return;
-    isTransitioning = true;
-
-    // Remove active class from all slides
-    slides.forEach((s) => {
-      s.classList.remove('active');
-    });
-
-    // Add active class to new slide
-    setTimeout(() => {
-      slides[index].classList.add('active');
-    }, 80);
-
-    dots.forEach((d, i) => {
-      const isActive = i === index;
-      d.classList.toggle('active', isActive);
-      d.setAttribute('aria-selected', isActive);
-    });
-
-    current = index;
-
-    // Reset progress bar
-    progressFill.style.animation = 'none';
-    setTimeout(() => {
-      progressFill.style.animation = `progressBar ${slideInterval}ms linear`;
-    }, 50);
-
-    setTimeout(() => {
-      isTransitioning = false;
-    }, 1000);
+// Create dots dynamically
+slides.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.setAttribute('role', 'tab');
+  dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+  if (i === 0) {
+    dot.classList.add('active');
+    dot.setAttribute('aria-selected', 'true');
+  } else {
+    dot.setAttribute('aria-selected', 'false');
   }
+  dotsContainer.appendChild(dot);
+});
+const dots = dotsContainer.querySelectorAll('button');
 
-  function next() {
-    showSlide((current + 1) % slides.length);
-  }
-
-  function prev() {
-    showSlide((current - 1 + slides.length) % slides.length);
-  }
-
-  nextBtn.addEventListener('click', () => {
-    next();
-    resetAuto();
+// Function to reset child animations
+function resetAnimations(slide) {
+  const animatedElements = slide.querySelectorAll('h1 span, p, .btn');
+  animatedElements.forEach(el => {
+    el.style.animation = 'none';
+    void el.offsetWidth; // trigger reflow
+    el.style.animation = ''; // restore animation
   });
+}
 
-  prevBtn.addEventListener('click', () => {
-    prev();
-    resetAuto();
-  });
+function showSlide(index) {
+  if (isTransitioning) return;
+  isTransitioning = true;
 
+  // Remove active from all slides
+  slides.forEach(s => s.classList.remove('active'));
+
+  // Add active class to the new slide
+  setTimeout(() => {
+    slides[index].classList.add('active');
+    resetAnimations(slides[index]); // Reset animations for child elements
+  }, 80);
+
+  // Update dots
   dots.forEach((d, i) => {
-    d.addEventListener('click', () => {
-      showSlide(i);
-      resetAuto();
-    });
+    const isActive = i === index;
+    d.classList.toggle('active', isActive);
+    d.setAttribute('aria-selected', isActive);
   });
 
-  function autoplay() {
-    autoSlide = setInterval(next, slideInterval);
-  }
+  current = index;
 
-  function resetAuto() {
-    clearInterval(autoSlide);
-    autoplay();
-  }
+  // Reset progress bar
+  progressFill.style.animation = 'none';
+  setTimeout(() => {
+    progressFill.style.animation = `progressBar ${slideInterval}ms linear`;
+  }, 50);
 
+  setTimeout(() => {
+    isTransitioning = false;
+  }, 1000);
+}
 
+function next() {
+  showSlide((current + 1) % slides.length);
+}
 
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-      prev();
-      resetAuto();
-    } else if (e.key === 'ArrowRight') {
-      next();
-      resetAuto();
-    }
-  });
+function prev() {
+  showSlide((current - 1 + slides.length) % slides.length);
+}
 
-  // Touch/Swipe support
-  let touchStartX = 0;
-  let touchEndX = 0;
+// Event listeners
+nextBtn.addEventListener('click', () => { next(); resetAuto(); });
+prevBtn.addEventListener('click', () => { prev(); resetAuto(); });
+dots.forEach((d, i) => d.addEventListener('click', () => { showSlide(i); resetAuto(); }));
 
-  document.querySelector('.hero').addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
+function autoplay() {
+  autoSlide = setInterval(next, slideInterval);
+}
 
-  document.querySelector('.hero').addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  });
-
-  function handleSwipe() {
-    if (touchEndX < touchStartX - 50) {
-      next();
-      resetAuto();
-    }
-    if (touchEndX > touchStartX + 50) {
-      prev();
-      resetAuto();
-    }
-  }
-
-  // Start autoplay
+function resetAuto() {
+  clearInterval(autoSlide);
   autoplay();
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') { prev(); resetAuto(); }
+  if (e.key === 'ArrowRight') { next(); resetAuto(); }
+});
+
+// Touch/Swipe support
+let touchStartX = 0;
+let touchEndX = 0;
+document.querySelector('.hero').addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+document.querySelector('.hero').addEventListener('touchend', e => { touchEndX = e.changedTouches[0].screenX; handleSwipe(); });
+function handleSwipe() {
+  if (touchEndX < touchStartX - 50) { next(); resetAuto(); }
+  if (touchEndX > touchStartX + 50) { prev(); resetAuto(); }
+}
+
+// ---- FIRST SLIDE ANIMATION FIX ----
+window.addEventListener('load', () => {
+  const firstSlide = slides[0];
+  firstSlide.classList.remove('active'); // remove active initially
+  resetAnimations(firstSlide); // reset animations on first slide
+
+  setTimeout(() => {
+    firstSlide.classList.add('active'); // trigger animations
+    progressFill.style.animation = `progressBar ${slideInterval}ms linear`; // start progress
+    autoplay(); // start autoplay
+  }, 50); // small delay to ensure animation triggers
+});
 </script>
 
 
@@ -792,12 +778,12 @@
     Our <span class="text-primary">Mission</span>
   </h1>
 
-  <blockquote class="mission-quote scroll-animate fade-in mx-auto max-w-3xl p-8 sm:p-10 max-[640px]:p-4 rounded-xl shadow-lg text-center" data-delay="400">
-    <p class="text-xl sm:text-3xl md:text-3xl leading-relaxed max-[640px]:leading-snug text-center">
+  <blockquote class="mission-quote scroll-animate fade-in mx-auto max-w-4xl p-8 sm:p-10 max-[640px]:p-4 rounded-xl shadow-lg text-center" data-delay="400">
+    <p class="text-xl sm:text-4xl md:text-3xl leading-relaxed max-[640px]:leading-snug text-center">
         <!-- Desktop version -->
         <span class="hidden md:block">
-            We are committed to making a tangible difference <br>
-            to the lives of our <span class="text-primary font-semibold">residents</span> and <span class="text-primary font-semibold">their families</span>.
+            <span class="text-primary">❛❛</span> We are committed to making a tangible difference <br>
+            to the lives of our <span class="text-primary font-semibold">residents</span> and <span class="text-primary font-semibold">their families</span><span class="text-primary"> ❜❜</span>
         </span>
 
         <!-- Mobile version -->
@@ -838,12 +824,12 @@
     </div>
 
     <!-- Over Two Decades Text -->
-    <div class="scroll-animate fade-sides mx-auto max-[640px]:px-2" data-delay="00" style="max-width: 1024px;"> 
-      <p class="text-2xl sm:text-3xl max-[640px]:text-base text-text-secondary leading-snug max-[640px]:leading-relaxed font-medium">
-        Over two decades of dedication, where every day we prove that <span class="text-primary font-semibold">professional excellence</span> and <span class="text-primary font-semibold">genuine warmth</span> can create something truly special.
-      </p>
-    </div>
-  </div>
+    <div class="scroll-animate fade-sides mx-auto px-4 max-[640px]:px-2" data-delay="00" style="max-width: 1024px;">
+  <p class="text-2xl sm:text-3xl max-[640px]:text-base text-text-secondary leading-snug max-[640px]:leading-relaxed font-medium text-center">
+    Over two decades of dedication, where every day we prove that <span class="text-primary font-semibold">professional excellence</span> and <span class="text-primary font-semibold">genuine warmth</span> can create something truly special.
+  </p>
+</div>
+
 </section>
 
 <style>
@@ -876,7 +862,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div class="order-2 lg:order-1">
                 <h2 class="font-inter font-bold text-3xl sm:text-4xl text-secondary mb-6 scroll-animate fade-blur">
-                    Where It All Began
+                    Where It All <span class="text-primary">Began</span>
                 </h2>
                 <div class="space-y-6 text-lg text-text-secondary leading-relaxed">
                     <p class="scroll-animate fade-blur" data-delay="200">
@@ -885,7 +871,7 @@
                     <p class="scroll-animate fade-blur" data-delay="400">
                         Our journey began with a commitment to bridge the gap between clinical excellence and genuine human connection. We understood that families needed more than just medical care—they needed peace of mind, knowing their loved ones were not just patients, but cherished members of our extended family.
                     </p>
-                    <p class="font-accent italic text-primary text-xl scroll-animate fade-blur" data-delay="600">
+                    <p class="font-accent italic text-primary text-xl scroll-animate fade-blur" data-delay="500">
                         "We don't just provide care; we create homes where dignity, respect, and professional excellence come together to nurture the human spirit."
                     </p>
                 </div>
@@ -1040,9 +1026,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="font-inter font-bold text-3xl sm:text-4xl text-secondary mb-4">
-                    Our Core Values
+                    Core <span class="text-primary">Values</span> 
                 </h2>
-                <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+                <p class="text-lg text-text-secondary max-w-3xl mx-auto">
                     The principles that guide every interaction, every decision, and every moment of care we provide.
                 </p>
             </div>
@@ -1125,7 +1111,7 @@
     <!-- LEFT SIDE – INFO -->
     <div class="z-10">
       <h2 class="font-inter font-bold text-4xl sm:text-5xl text-secondary mb-6 leading-tight office-animate fade-up">
-        Our <span class="text-primary">Head Office</span>
+        Head <span class="text-primary">Office</span>
       </h2>
       <p class="text-lg text-text-secondary mb-10 leading-relaxed office-animate fade-up" data-delay="100" style="margin-top: -10px; margin-bottom: 10px;">
         Our head office team manages Accounts, HR, Marketing, IT services, and Property. 
@@ -1145,7 +1131,7 @@
           </div>
         </div>
 
-        <div class="info-card group office-animate fade-up" data-delay="300">
+        <div class="info-card group office-animate fade-up" data-delay="200">
           <div class="icon-wrap bg-secondary/10 text-secondary">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" 
@@ -1188,7 +1174,7 @@
   <!-- DIRECTORS AND STAFF SECTION -->
   <div class="max-w-7xl mx-auto px-6 mt-16">
     <!-- Directors Section -->
-    <div class="mb-12 office-animate fade-up" data-delay="500">
+    <div class="mb-12 office-animate fade-up" data-delay="200">
       <h3 class="font-inter font-bold text-2xl sm:text-3xl text-secondary mb-6 flex items-center">
         <svg class="w-6 h-6 mr-3 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
@@ -1253,12 +1239,12 @@
     </div>
 
     <!-- Staff Section -->
-    <div class="office-animate fade-up" data-delay="600">
+    <div class="office-animate fade-up" data-delay="200">
       <h3 class="font-inter font-bold text-2xl sm:text-3xl text-secondary mb-6 flex items-center">
         <svg class="w-6 h-6 mr-3 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
         </svg>
-        Staff
+        Executive Staff
       </h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Justyna Podgorniak -->
@@ -1527,7 +1513,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <h2 class="font-inter font-bold text-3xl sm:text-4xl text-secondary mb-4">
-        Our Care Homes
+        Our <span class="text-primary">Homes</span>
       </h2>
       <p class="text-lg text-text-secondary max-w-3xl mx-auto">
         Home away from home
@@ -2833,8 +2819,7 @@ if (statsSection) {
                     <li><a href="#headoffice">Head Office</a></li>
                     <li><a href="#our-homes">Our Homes</a></li>
                     <li><a href="#headoffice">Contact Us</a></li>
-                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                    
                 </ul>
             </div>
 
